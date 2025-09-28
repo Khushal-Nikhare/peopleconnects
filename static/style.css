@@ -1,0 +1,32 @@
+body {
+    background-color: #f0f2f5;
+}
+
+.navbar {
+    border-bottom: 1px solid #ddd;
+}
+
+.posts-container {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.comment {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #f0f2f5;
+    margin-bottom: 8px;
+}
+
+.comment strong {
+    font-size: 0.9rem;
+}
+
+.comment p {
+    margin-bottom: 0;
+}
