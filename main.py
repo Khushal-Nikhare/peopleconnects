@@ -11,7 +11,7 @@ app = FastAPI()
 
 # --- Database ---
 client = MongoClient("mongodb://localhost:27017/")
-db = client["people_connects"]
+db = client["peoples_connect"]
 users_collection = db["users"]
 posts_collection = db["posts"]
 
