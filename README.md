@@ -1,6 +1,6 @@
 PeoplesConnect
 
-PeopleConnects is a simple social media application built with Python, FastAPI, and MongoDB. It allows users to create accounts, share posts with text and images, and interact with each other's content through likes and comments.
+PeoplesConnect is a simple social media application built with Python, FastAPI, and MongoDB. It allows users to create accounts, share posts with text and images, and interact with each other's content through likes and comments.
 
 ## Features
 
