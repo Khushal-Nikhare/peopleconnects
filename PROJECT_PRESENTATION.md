@@ -1,4 +1,4 @@
-# PeoplesConnect - NoSQL Database Project
+# PeopleConnects - NoSQL Database Project
 ## Team Presentation Document
 
 ---
@@ -16,7 +16,7 @@
 
 ## Project Overview
 
-**PeoplesConnect** is a social media application demonstrating MongoDB (NoSQL) database implementation with Python FastAPI framework. The project showcases document-oriented database design, CRUD operations, data relationships, and real-world NoSQL use cases.
+**PeopleConnects** is a social media application demonstrating MongoDB (NoSQL) database implementation with Python FastAPI framework. The project showcases document-oriented database design, CRUD operations, data relationships, and real-world NoSQL use cases.
 
 ### Technology Stack
 - **Database**: MongoDB (NoSQL Document Database)
@@ -219,7 +219,7 @@ Designed and implemented the **posts collection** with full CRUD operations incl
 {
   "_id": ObjectId("507f1f77bcf86cd799439012"),
   "author": "john_doe",
-  "content": "Just joined PeoplesConnect! Excited to share my journey.",
+  "content": "Just joined PeopleConnects! Excited to share my journey.",
   "photo": "john_doe_sunset.jpg",
   "likes": ["alice", "bob", "charlie"],
   "comments": [
@@ -903,12 +903,12 @@ Action: Set cookie, redirect to home
 
 Step 3: Create First Post
 ─────────────────────
-Input: content="Hello PeoplesConnect!", photo=null
+Input: content="Hello PeopleConnects!", photo=null
 
 MongoDB:
   db.posts.insertOne({
     author: "john",
-    content: "Hello PeoplesConnect!",
+    content: "Hello PeopleConnects!",
     photo: null,
     likes: [],
     comments: [],
@@ -929,7 +929,7 @@ Result:
     {
       _id: ObjectId("65a2..."),
       author: "john",
-      content: "Hello PeoplesConnect!",
+      content: "Hello PeopleConnects!",
       likes: [],
       comments: [],
       timestamp: "2024-01-15 15:00:00"
