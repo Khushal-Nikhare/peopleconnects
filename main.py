@@ -58,17 +58,17 @@ async def signup(username: str = Form(...), password: str = Form(...)):
     return RedirectResponse(url="/login", status_code=303)
 
 @app.get("/login", response_class=HTMLResponse)
-async def login_form(request: Request):
+async def login_form(request: Request, error: str = None):
     user = get_current_user(request)
     if user:
         return RedirectResponse(url="/", status_code=303)
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse("login.html", {"request": request, "error": error})
 
 @app.post("/login")
-async def login(response: Response, username: str = Form(...), password: str = Form(...)):
+async def login(request: Request, username: str = Form(...), password: str = Form(...)):
     user = users_collection.find_one({"username": username})
     if not user or user["password"] != password:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
+        return RedirectResponse(url="/login?error=Invalid username or password", status_code=303)
     response = RedirectResponse(url="/", status_code=303)
     response.set_cookie(key="username", value=username, httponly=True)
     return response
