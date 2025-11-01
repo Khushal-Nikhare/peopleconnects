@@ -1,21 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Login - PeopleConnects{% endblock %}
+{% block title %}Register - PeopleConnects{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-5">
     <div class="col-md-5">
         <div class="card shadow">
             <div class="card-body p-4">
-                <h2 class="text-center mb-4">Login</h2>
-                
-                <!-- Success Message -->
-                {% if success %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>✅ Success!</strong> {{ success }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                {% endif %}
+                <h2 class="text-center mb-4">Create Account</h2>
                 
                 <!-- Error Message -->
                 {% if error %}
@@ -25,28 +17,41 @@
                 </div>
                 {% endif %}
                 
-                <form method="POST" action="/login">
+                <form method="POST" action="/register">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" 
-                               class="form-control {% if error %}is-invalid{% endif %}" 
+                               class="form-control {% if error and 'username' in error.lower() %}is-invalid{% endif %}" 
                                id="username" 
                                name="username" 
                                value="{{ username if username else '' }}"
+                               minlength="3"
+                               required>
+                        <div class="form-text">Username must be at least 3 characters long.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" 
+                               class="form-control {% if error and 'email' in error.lower() %}is-invalid{% endif %}" 
+                               id="email" 
+                               name="email" 
+                               value="{{ email if email else '' }}"
                                required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" 
-                               class="form-control {% if error %}is-invalid{% endif %}" 
+                               class="form-control" 
                                id="password" 
                                name="password" 
+                               minlength="6"
                                required>
+                        <div class="form-text">Password must be at least 6 characters long.</div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
                 <p class="text-center mt-3">
-                    Don't have an account? <a href="/register">Register here</a>
+                    Already have an account? <a href="/login">Login here</a>
                 </p>
             </div>
         </div>

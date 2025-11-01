@@ -1,0 +1,3 @@
+"""
+PeopleConnects Backend Package
+"""

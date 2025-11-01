@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - PeopleConnects{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Edit Profile</h2>
+                
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                
+                <form method="POST" action="/profile/edit">
+                    <div class="mb-3">
+                        <label for="new_username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="new_username" name="new_username" 
+                               value="{{ username }}" required pattern="[a-zA-Z0-9_]{3,20}"
+                               title="Username must be 3-20 characters, letters, numbers, and underscores only">
+                        <div class="form-text">Change your username (must be unique)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               value="{{ email }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password (optional)</label>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               placeholder="Leave blank to keep current password">
+                        <div class="form-text">Enter a new password only if you want to change it</div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="/profile/{{ username }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
