@@ -390,18 +390,6 @@ pip install -r requirements.txt
 
 ---
 
-## 🔄 Future Enhancements
-
-- [ ] Direct messaging between users
-- [ ] Image/video upload for posts
-- [ ] Hashtags and trending topics
-- [ ] Email verification
-- [ ] Password reset functionality
-- [ ] Real-time notifications
-- [ ] Dark mode toggle
-
----
-
 ## 📝 License
 
 This project is created for educational purposes. Feel free to modify and use it for learning.
