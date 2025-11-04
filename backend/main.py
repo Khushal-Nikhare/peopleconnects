@@ -391,6 +391,65 @@ async def add_comment(request: Request, post_id: str, text: str = Form(...)):
     
     return RedirectResponse(f"/posts/{post_id}", status_code=303)
 
+@app.get("/posts/{post_id}/edit", response_class=HTMLResponse)
+async def edit_post_page(request: Request, post_id: str):
+    username = get_current_user(request)
+    if not username:
+        return RedirectResponse("/login")
+
+    db = get_database()
+    post = await db.posts.find_one({"_id": ObjectId(post_id)})
+
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+
+    if post["author"] != username:
+        raise HTTPException(status_code=403, detail="You are not authorized to edit this post")
+
+    post["id"] = str(post["_id"])
+    return templates.TemplateResponse("edit_post.html", {"request": request, "post": post, "username": username})
+
+@app.post("/posts/{post_id}/edit")
+async def edit_post(request: Request, post_id: str, content: str = Form(...)):
+    username = get_current_user(request)
+    if not username:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+
+    db = get_database()
+    post = await db.posts.find_one({"_id": ObjectId(post_id)})
+
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+
+    if post["author"] != username:
+        raise HTTPException(status_code=403, detail="You are not authorized to edit this post")
+
+    await db.posts.update_one(
+        {"_id": ObjectId(post_id)},
+        {"$set": {"content": content}}
+    )
+
+    return RedirectResponse(f"/posts/{post_id}", status_code=303)
+
+@app.post("/posts/{post_id}/delete")
+async def delete_post(request: Request, post_id: str):
+    username = get_current_user(request)
+    if not username:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+
+    db = get_database()
+    post = await db.posts.find_one({"_id": ObjectId(post_id)})
+
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+
+    if post["author"] != username:
+        raise HTTPException(status_code=403, detail="You are not authorized to delete this post")
+
+    await db.posts.delete_one({"_id": ObjectId(post_id)})
+
+    return RedirectResponse("/feed", status_code=303)
+
 # ==================== PROFILE & FOLLOWER ROUTES ====================
 
 @app.get("/profile/{username}", response_class=HTMLResponse)

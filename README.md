@@ -168,7 +168,7 @@ db.posts.create_index("author")             # Filter by author
    - Run manually:
      ```bash
      cd backend
-     python -m uvicorn main:app --reload
+     python -m uvicorn backend.main:app --reload --port 8000
      ```
 
 3. **Open browser**: http://localhost:8000
