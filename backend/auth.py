@@ -5,11 +5,8 @@ import bcrypt
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from typing import Optional
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = "your-secret-key-change-this-in-production"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
