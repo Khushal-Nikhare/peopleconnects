@@ -12,11 +12,16 @@ import shutil
 import uuid
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Ensure backend absolute imports work when running this module directly
 BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
+
+# Load environment variables
+load_dotenv()
 
 from backend.database import connect_to_mongo, close_mongo_connection, get_database
 from backend.models import UserCreate, UserLogin, PostCreate, CommentCreate, AdminLogin
@@ -31,8 +36,8 @@ app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="stat
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # Admin credentials (in production, store these securely)
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD_HASH = hash_password("admin123")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD_HASH = hash_password(os.getenv("ADMIN_PASSWORD"))
 
 @app.on_event("startup")
 async def startup_db_client():
